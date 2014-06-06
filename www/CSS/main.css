@@ -1,0 +1,30 @@
+body, html {
+	padding: 0px;
+	margin: 0px;
+}
+
+.content_container {
+	/*padding: 7px;*/
+}
+
+.errors{
+	color: red;
+	font-weight: bold;
+}
+
+#calendar_menu {
+	background: pink;
+	width: 100%;
+	margin: 0px;	
+}
+
+.menu_main {	
+	list-style: none;
+	padding-left: 0px;
+	padding-right: 1em;	
+}
+
+.menu_main > li {
+	display: inline;
+	padding-left: 1em;
+}

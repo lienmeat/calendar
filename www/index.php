@@ -1,0 +1,1 @@
+<?php require_once 'calendar2/public/index.php'; ?>
