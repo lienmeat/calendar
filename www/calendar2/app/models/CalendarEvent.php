@@ -74,7 +74,10 @@ class CalendarEvent extends Eloquent {
 				}else{
 					$event->CATEGORIES = NULL;
 				}				
-				$event->ical = json_encode($e);				
+				$event->ical = json_encode($e);
+				$ts = date('Y-m-d H:i:s');
+				$event->created_at = $ts;
+				$event->updated_at = $ts;
 				$events[] = $event->toArray();
 			}
 			CalendarEvent::insert($events);
