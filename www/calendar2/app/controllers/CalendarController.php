@@ -160,14 +160,14 @@ class CalendarController extends BaseController {
 	* Show calendars	
 	*/
 	public function getShowAll(){
-		$calendars = Calendar::All();
+		$calendars = Calendar::All();		
 		$cal_arrs = array();
 		//$events = array();
 		$start_date = date('Y-m', strtotime('-6 months'))."-01 00:00:00";
-		$end_date = date('Y-m', strtotime('+6 months'))."-01 00:00:00";
+		$end_date = date('Y-m', strtotime('+6 months'))."-01 00:00:00";		
 		if($calendars){			
 			foreach($calendars as $c){
-				//$events[$c->id] = $this->_getCalendarEvents($c->id, $start_date, $end_date);
+				//$events[$c->id] = $this->_getCalendarEvents($c->id, $start_date, $end_date);				
 				$cal_arrs[] = $this->_formatCalendar($c);				
 			}
 			return View::make('calendar')->with('page_title', 'All Calendars')->with('calendars', $cal_arrs );
@@ -417,8 +417,9 @@ class CalendarController extends BaseController {
 	* @return object
 	*/
 	public function _formatCalendar($calendar_row){
-		if(!empty($calendar_row)){
+		if(!empty($calendar_row)){			
 			$arr = $calendar_row->toArray();
+			//die('this: '.print_r($calendar_row, true));
 			$config = json_decode($arr['config']);
 			if(!empty($config)){
 				foreach($config as $k=>$v) {

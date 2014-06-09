@@ -3,7 +3,10 @@
 	"description": "The Laravel Framework.",
 	"keywords": ["framework", "laravel"],
 	"require": {
-		"laravel/framework": "4.0.*",
+		"laravel/framework": "4.1.*",
+		"advanced-store/oauth2-client": "dev-master",
+		"sammyk/laravel-facebook-sdk": "dev-master",
+		"tenowg/recaptcha": "1.0.*",
 		"machuga/authority-l4" : "dev-master"
 	},
 	"autoload": {
