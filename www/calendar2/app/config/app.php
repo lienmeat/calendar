@@ -116,6 +116,8 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'Authority\AuthorityL4\AuthorityL4ServiceProvider',
 		'iCalReader\iCalReaderServiceProvider',
+		'Artdarek\OAuth\OAuthServiceProvider',
+		
 	),
 
 	/*
@@ -182,6 +184,7 @@ return array(
 		'View'            => 'Illuminate\Support\Facades\View',
 		'Authority'		  => 'Authority\AuthorityL4\Facades\Authority',
 		'iCalReader'	  => 'iCalReader\Facades\ICRead',
+		'OAuth' => 'Artdarek\OAuth\Facade\OAuth',
 	),
 
 );
