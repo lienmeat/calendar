@@ -15,6 +15,8 @@ Route::get('/', 'CalendarController@getIndex');
 
 Route::get('admin', 'CalendarController@getAdmin');
 
+Route::get('oauth2callback', 'CalendarController@getLoginwithgoogle');
+
 Route::controller('calendars', 'CalendarController');
 Route::controller('sourcetypes', 'SourceTypeController');
 Route::controller('events', 'CalendarEventController');

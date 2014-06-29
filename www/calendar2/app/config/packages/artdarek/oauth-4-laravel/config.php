@@ -22,10 +22,8 @@ return array(
 		 * Google
 		 */
         'Google' => array(
-		    'client_id'     => '535166830160-pijqjvse9alt582n9vecegcagqsccp9o.apps.googleusercontent.com',
-		    'client_secret' => 'AIzaSyDKS3HS4MBSPaBEW_pTUZQa3T2f7LZGsw0',
-		    'device_name' => 'lientop',
-		    'device_id' => '12345-lientop',
+		    'client_id'     => '535166830160-4cstgsaa155tkjreksnis6mdkuiad40b.apps.googleusercontent.com',
+		    'client_secret' => '5bx3msKcHGTJzjLbU_nfgKFt',
 		    'scope'         => array('userinfo_email', 'userinfo_profile'),
 		),
 	)
