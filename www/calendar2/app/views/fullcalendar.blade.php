@@ -160,3 +160,4 @@
 <div id="fullcalendar">
 
 </div>
+{{ var_dump(Auth::user()) }}

@@ -2,51 +2,51 @@
 class LoginController extends BaseController {
 
 	public function getLogin() {
-
-	}
-
-	public function getLoginwithgoogle() {		
 		if( !$this->_isLoggedIn() ) {
-		    // get data from input
-		    $code = Input::get( 'code' );
+			// get data from input
+			$code = Input::get( 'code' );
 
-		    // get google service
-		    $googleService = OAuth::consumer( 'Google' );
+			// get google service
+			$googleService = OAuth::consumer( 'Google' );
 
-		    // check if code is valid
+			// check if code is valid
 
-		    // if code is provided get user data and sign in
-		    if ( !empty( $code ) ) {
+			// if code is provided get user data and sign in
+			if ( !empty( $code ) ) {
+				// This was a callback request from google, get the token
+				$token = $googleService->requestAccessToken( $code );
+				// Send a request with it
+				$result = json_decode( $googleService->request( 'https://www.googleapis.com/oauth2/v1/userinfo' ), true );
+				$result['token'] = $token;
 
-		        // This was a callback request from google, get the token
-		        $token = $googleService->requestAccessToken( $code );
-		        		        // Send a request with it
-		        $result = json_decode( $googleService->request( 'https://www.googleapis.com/oauth2/v1/userinfo' ), true );
-		        $result['token'] = $token;
-
-		        
-		        //logged in successfully, now what?
-		        Session::put('user_info', $result);
-		        
-		    }
-		    // if not ask for permission first
-		    else {
-		        // get googleService authorization
-		        $url = $googleService->getAuthorizationUri();
-
-		        // return to google login url
-		        return Redirect::to( (string) $url );
-		    }
-		}	
-		else{
-			//user is already logged in.  Why are they here?
-			$result = Session::get('user_info');
-			$message = 'Your unique Google user id is: ' . $result['id'] . ' and your name is ' . $result['name'];
-		    echo $message. "<br/>";
-			dd(Session::get('user_info'));
+				$users = User::where('email', $result['email']);				
+				if( is_array($users) && !empty($users) ) {
+					//user exists, log them in
+					$user = reset($users);			
+					Auth::loginUsingId($user->id);
+				}
+				else{
+					//register new user	& log them in				
+					$tmp_user = new User;
+					$tmp_user->email = $result['email'];
+					$tmp_user->username = $result['email'];
+					$tmp_user->given_name = $result['given_name'];
+					$tmp_user->family_name = $result['family_name'];
+					$tmp_user->save();
+					Auth::loginUsingId($tmp_user->id);
+				}
+			}
+			// if not ask for permission first
+			else {
+				// get googleService authorization
+				$url = $googleService->getAuthorizationUri();
+				// return to google login url
+				return Redirect::to( (string) $url );
+			}
 		}
 
-
+		//go to home page
+		return Redirect::to('/');		
 	}
 
 	/**
@@ -54,7 +54,7 @@ class LoginController extends BaseController {
 	 * @return bool
 	 */
 	protected function _isLoggedIn() {
-		return Session::has('user_info');
+		return Auth::check();
 	}
 
 }

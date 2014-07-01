@@ -11,14 +11,12 @@
 |
 */
 
-App::before(function($request)
-{
+App::before(function($request) {
 	//
 });
 
 
-App::after(function($request, $response)
-{
+App::after(function($request, $response) {
 	//
 });
 
@@ -71,10 +69,8 @@ App::after(function($request, $response)
 |
 */
 
-Route::filter('csrf', function()
-{
-	if (Session::token() != Input::get('_token'))
-	{
+Route::filter('csrf', function() {
+	if (Session::token() != Input::get('_token')) {
 		throw new Illuminate\Session\TokenMismatchException;
-	}
+	}	
 });
