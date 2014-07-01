@@ -19,10 +19,10 @@ class LoginController extends BaseController {
 				$result = json_decode( $googleService->request( 'https://www.googleapis.com/oauth2/v1/userinfo' ), true );
 				$result['token'] = $token;
 
-				$users = User::where('email', $result['email']);				
-				if( is_array($users) && !empty($users) ) {
-					//user exists, log them in
-					$user = reset($users);			
+				$user = User::where('email', $result['email'])->get()->first();				
+				
+				if( $user ) {
+					//user exists, log them in					
 					Auth::loginUsingId($user->id);
 				}
 				else{

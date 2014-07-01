@@ -2,6 +2,12 @@
 
 class CalendarController extends BaseController {
 
+	private $calendar_cache_lifetime = 43200;
+
+	public function __construct() {
+		$this->beforeFilter('guest');
+	}
+
 	/*
 	|--------------------------------------------------------------------------
 	| Calendar Controller
@@ -10,7 +16,7 @@ class CalendarController extends BaseController {
 	| Route::get('Calendars', 'CalendarController@<method name>');
 	|
 	*/
-	private $calendar_cache_lifetime = 43200;
+	
 
 	public function getAdmin(){
 		$this->_canManage();
