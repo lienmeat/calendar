@@ -282,6 +282,7 @@ class CalendarController extends BaseController {
 			$calendar->textColor = $data['textColor'];
 			$calendar->sourceType = $data['sourceType'];
 			$calendar->config = $data['config'];
+			$calendar->updateInterval = 0;
 			$calendar->save();
 			$this->_updateEvents($calendar);			
 			return Redirect::to('/');
